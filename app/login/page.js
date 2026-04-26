@@ -1,18 +1,16 @@
-// app/page.js
-// First Entry Page = Signup Page
+// app/login/page.jsx
 
 "use client";
 
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import AuthForm from "../components/Authform";
+import AuthForm from "../../components/Authform";
 
-export default function HomePage() {
+export default function LoginPage() {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
-    username: "",
     email: "",
     password: "",
   });
@@ -29,25 +27,20 @@ export default function HomePage() {
 
     try {
       await axios.post(
-        "http://localhost:5000/api/auth/signup",
+        "http://localhost:5000/api/auth/login",
         formData
       );
 
       router.push("/dashboard");
     } catch (err) {
-      alert(err.response?.data?.message || "Signup failed");
+      alert(err.response?.data?.message || "Login failed");
     }
   };
 
   return (
     <AuthForm
-      title="Create Account"
+      title="Welcome Back"
       fields={[
-        {
-          name: "username",
-          type: "text",
-          placeholder: "Enter your username",
-        },
         {
           name: "email",
           type: "email",
@@ -59,10 +52,10 @@ export default function HomePage() {
           placeholder: "Enter your password",
         },
       ]}
-      buttonText="Sign Up"
-      bottomText="Already have an account?"
-      bottomLinkText="Login"
-      bottomLinkHref="/login"
+      buttonText="Login"
+      bottomText="Don't have an account?"
+      bottomLinkText="Register"
+      bottomLinkHref="/"
       formData={formData}
       handleChange={handleChange}
       handleSubmit={handleSubmit}
