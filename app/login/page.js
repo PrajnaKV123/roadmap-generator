@@ -26,10 +26,13 @@ export default function LoginPage() {
     e.preventDefault();
 
     try {
-      await axios.post(
+      const res = await axios.post(
         "http://localhost:5000/api/auth/login",
         formData
       );
+
+      const user = res.data.user;
+      localStorage.setItem("user", JSON.stringify(user));
 
       router.push("/dashboard");
     } catch (err) {

@@ -28,6 +28,11 @@ router.post("/signup", async (req, res) => {
 
     res.status(201).json({
       message: "Signup successful",
+      user: {
+        _id: newUser._id,
+        username: newUser.username,
+        email: newUser.email,
+      },
     });
 
   } catch (error) {
@@ -56,12 +61,51 @@ router.post("/login", async (req, res) => {
 
     res.status(200).json({
       message: "Login successful",
+      user: {
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        bio: user.bio,
+        interests: user.interests,
+      },
     });
 
   } catch (error) {
     res.status(500).json({
       message: "Server error",
     });
+  }
+});
+
+
+// UPDATE PROFILE (bio & interests)
+router.put("/profile/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { bio, interests } = req.body;
+
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { bio, interests },
+      { new: true }
+    );
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({
+      message: "Profile updated",
+      user: {
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        bio: user.bio,
+        interests: user.interests,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
   }
 });
 

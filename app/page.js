@@ -1,5 +1,3 @@
-// app/page.js
-// First Entry Page = Signup Page
 
 "use client";
 
@@ -28,10 +26,13 @@ export default function HomePage() {
     e.preventDefault();
 
     try {
-      await axios.post(
+      const res = await axios.post(
         "http://localhost:5000/api/auth/signup",
         formData
       );
+
+      const user = res.data.user;
+      localStorage.setItem("user", JSON.stringify(user));
 
       router.push("/dashboard");
     } catch (err) {
