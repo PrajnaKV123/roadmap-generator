@@ -35,8 +35,7 @@ Remember: You're helping users build their careers through structured learning p
 
 async function callWithRetry(genAI, question, retries = MAX_RETRIES) {
   try {
-    // Create client with v1 API endpoint instead of v1beta
-    const model = genAI.getGenerativeModel({
+const model = genAI.getGenerativeModel({
       model: "gemini-3.1-flash-lite-preview",
       systemInstruction: {
         role: "system",
