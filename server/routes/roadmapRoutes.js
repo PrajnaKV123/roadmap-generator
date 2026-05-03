@@ -39,7 +39,6 @@ function parseRoadmapToChecklist(text) {
   const entries = explicitSteps.length >= 3 ? explicitSteps : candidateSteps;
 
   return Array.from(new Set(entries.map(({ cleaned }) => cleaned)))
-    .slice(0, 12)
     .map((text) => ({ text, completed: false }));
 }
 
@@ -63,34 +62,48 @@ const { skill, level, duration, goal, userId } = req.body;
     }
 
     const prompt = `
-Create a clear step-by-step learning roadmap for:
+Create a structured learning roadmap with clear phases.
 
 Skill: ${skill}
-Current Level: ${level}
-Learning Duration: ${duration}
-Career Goal: ${goal || "Not specified"}
+Level: ${level}
+Duration: ${duration}
+Goal: ${goal || "Not specified"}
 
-Please provide:
-
-1. Step-by-step learning stages
-2. Important tools, technologies, and concepts to learn
-3. Projects to build for practical learning
-4. Career guidance and preparation tips
-5. Best learning resources for each stage including:
+IMPORTANT:
+- DO NOT use symbols like #, ###, *, |, or markdown formatting
+- Divide roadmap into phases (Phase 1, Phase 2, etc.)
+- Each phase must contain 5–8 actionable checklist steps
+- Steps should be short and practical
+ Step-by-step learning stages
+ Important tools, technologies, and concepts to learn
+ Projects to build for practical learning
+ Career guidance and preparation tips
+- Include learning + projects + practice tasks
+- No long paragraphs, only bullet steps
+Learning Resources:
+- Course Name - https://link
+- YouTube Channel - https://link
+- Documentation - https://link
+- Practice Platform - https://link
+ Best learning resources for each stage including:
    - Free courses
    - YouTube tutorials
    - Official documentation
    - Practice platforms
    - Project ideas
 
-Make the roadmap:
-- simple
-- practical
-- beginner-friendly
-- student-friendly
-- clearly structured
+Example format:
 
-Format the response in a clean and readable way.
+Phase 1: Basics
+- Learn X
+- Practice Y
+- Build small project
+
+Phase 2: Intermediate
+- Learn A
+- Build B
+
+Continue for full duration.
 `;
 
 const model = genAI.getGenerativeModel({
