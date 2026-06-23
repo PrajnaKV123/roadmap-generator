@@ -18,6 +18,15 @@ router.post("/signup", async (req, res) => {
       });
     }
 
+    // Check if password already exists
+    const existingPassword = await User.findOne({ password });
+
+    if (existingPassword) {
+      return res.status(400).json({
+        message: "This password already exists. Please choose a different password",
+      });
+    }
+
     const newUser = new User({
       username,
       email,
@@ -36,6 +45,12 @@ router.post("/signup", async (req, res) => {
     });
 
   } catch (error) {
+    // Handle unique constraint error for password
+    if (error.code === 11000) {
+      return res.status(400).json({
+        message: "This password already exists. Please choose a different password",
+      });
+    }
     res.status(500).json({
       message: "Server error",
     });
