@@ -33,7 +33,7 @@ export default function ProfilePage() {
     const fetchRoadmaps = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/roadmap/user/${parsed._id}`
+           `${process.env.NEXT_PUBLIC_API_URL}/api/roadmap/user/${parsed._id}`
         );
         setRoadmaps(res.data);
       } catch (error) {
@@ -52,7 +52,7 @@ export default function ProfilePage() {
     setSaving(true);
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/auth/profile/${user._id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/auth/profile/${user._id}`,
         { bio: newBio, interests: newInterests }
       );
       const updatedUser = res.data.user;

@@ -27,7 +27,7 @@ export default function GeneratedRoadmapPage() {
         const { _id: userId } = JSON.parse(storedUser);
 
         const res = await axios.get(
-          `http://localhost:5000/api/roadmap/user/${userId}`
+          `${process.env.NEXT_PUBLIC_API_URL}/api/roadmap/user/${userId}`
         );
 
         setRoadmaps(res.data);
@@ -51,7 +51,7 @@ export default function GeneratedRoadmapPage() {
       setSavingId(roadmapId);
 
       const res = await axios.patch(
-        `http://localhost:5000/api/roadmap/${roadmapId}/checklist`,
+         `${process.env.NEXT_PUBLIC_API_URL}/api/roadmap/${roadmapId}/checklist`,
         {
           itemIndex: index,
           completed: checked,

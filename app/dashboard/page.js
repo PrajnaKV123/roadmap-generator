@@ -27,7 +27,7 @@ export default function Dashboard() {
     const fetchRoadmaps = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/roadmap/user/${userId}`
+          `${process.env.NEXT_PUBLIC_API_URL}/api/roadmap/user/${userId}`
         );
         setRoadmaps(res.data);
       } catch (error) {

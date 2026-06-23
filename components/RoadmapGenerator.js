@@ -39,7 +39,7 @@ const handleGenerate = async (e) => {
       const userId = user._id;
 
       const res = await axios.post(
-        "http://localhost:5000/api/roadmap/generate",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/roadmap/generate`,
         { ...formData, userId }
       );
 
