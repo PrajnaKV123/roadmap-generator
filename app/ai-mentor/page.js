@@ -13,7 +13,7 @@ export default function AIMentorPage() {
       id: 1,
       type: "ai",
       content:
-        "Hello! I'm your AI Career Mentor. I'm here to help you with:\n\n• Learning path guidance\n• Roadmap recommendations\n• Interview preparation\n• Project suggestions\n• Career advice\n• Skill gap analysis\n\nWhat would you like to know?",
+        "Hello! I'm your AI Career Mentor. I'm here to help you with:\n\nLearning path guidance\nRoadmap recommendations\nInterview preparation\nProject suggestions\nCareer advice\nSkill gap analysis\n\nWhat would you like to know?",
       timestamp: new Date(),
     },
   ]);
@@ -24,8 +24,48 @@ export default function AIMentorPage() {
   const messagesEndRef = useRef(null);
   const router = useRouter();
 
-  // Get backend URL from environment variable
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+  // Clean Gemini Markdown formatting
+  const cleanAIResponse = (text) => {
+    if (!text) return "";
+
+    let cleaned = text;
+
+    // Remove markdown headings
+    cleaned = cleaned.replace(/^#{1,6}\s*/gm, "");
+
+    // Remove bold formatting
+    cleaned = cleaned.replace(/\*\*(.*?)\*\*/gs, "$1");
+
+    // Remove italic formatting
+    cleaned = cleaned.replace(/(?<!\*)\*(?!\*)(.*?)\*(?!\*)/gs, "$1");
+
+    // Remove underscores used for italic/bold
+    cleaned = cleaned.replace(/__(.*?)__/gs, "$1");
+    cleaned = cleaned.replace(/_(.*?)_/gs, "$1");
+
+    // Remove markdown code blocks
+    cleaned = cleaned.replace(/```[\s\S]*?```/g, (match) => {
+      return match
+        .replace(/```[a-zA-Z0-9]*\n?/g, "")
+        .replace(/```/g, "");
+    });
+
+    // Remove inline code formatting
+    cleaned = cleaned.replace(/`([^`]+)`/g, "$1");
+
+    // Convert markdown bullet points to simple bullet points
+    cleaned = cleaned.replace(/^\s*[-*+]\s+/gm, "• ");
+
+    // Remove horizontal lines
+    cleaned = cleaned.replace(/^[-*_]{3,}\s*$/gm, "");
+
+    // Remove excessive blank lines
+    cleaned = cleaned.replace(/\n{3,}/g, "\n\n");
+
+    return cleaned.trim();
+  };
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -70,10 +110,14 @@ export default function AIMentorPage() {
         }
       );
 
+      const cleanedResponse = cleanAIResponse(
+        response.data.response
+      );
+
       const aiMessage = {
         id: Date.now() + 1,
         type: "ai",
-        content: response.data.response,
+        content: cleanedResponse,
         timestamp: new Date(),
       };
 
@@ -156,7 +200,7 @@ export default function AIMentorPage() {
           {/* Chat Container */}
           <div className="bg-white border border-[#E2C9A0] rounded-[32px] shadow-lg overflow-hidden">
 
-            {/* Chat Messages */}
+            {/* Messages */}
             <div className="h-[500px] sm:h-[600px] overflow-y-auto p-4 sm:p-6 space-y-4">
 
               {messages.map((message) => (
@@ -169,12 +213,14 @@ export default function AIMentorPage() {
                   }`}
                 >
 
+                  {/* AI Icon */}
                   {message.type === "ai" && (
                     <div className="flex-shrink-0 w-8 h-8 bg-[#C49A6C] rounded-full flex items-center justify-center">
                       <Bot className="w-4 h-4 text-white" />
                     </div>
                   )}
 
+                  {/* Message */}
                   <div
                     className={`max-w-[80%] sm:max-w-[70%] rounded-2xl px-4 py-3 ${
                       message.type === "user"
@@ -182,6 +228,7 @@ export default function AIMentorPage() {
                         : "bg-[#FDF6EE] border border-[#E2C9A0] text-[#2C1810]"
                     }`}
                   >
+
                     <p className="whitespace-pre-wrap leading-relaxed">
                       {message.content}
                     </p>
@@ -198,8 +245,10 @@ export default function AIMentorPage() {
                         minute: "2-digit",
                       })}
                     </p>
+
                   </div>
 
+                  {/* User Icon */}
                   {message.type === "user" && (
                     <div className="flex-shrink-0 w-8 h-8 bg-[#8C4A36] rounded-full flex items-center justify-center">
                       <User className="w-4 h-4 text-white" />
@@ -277,10 +326,13 @@ export default function AIMentorPage() {
               </div>
             )}
 
-            {/* Input Form */}
+            {/* Input */}
             <div className="border-t border-[#E2C9A0] p-4 sm:p-6">
 
-              <form onSubmit={handleSubmit} className="flex gap-3">
+              <form
+                onSubmit={handleSubmit}
+                className="flex gap-3"
+              >
 
                 <div className="flex-1 relative">
 
