@@ -5,7 +5,7 @@ require("dotenv").config();
 const router = express.Router();
 
 const MAX_RETRIES = 3;
-const INITIAL_RETRY_DELAY = 10000; // 10 seconds to avoid quota limits
+const INITIAL_RETRY_DELAY = 10000; 
 
 const systemPrompt = `You are an AI Career Mentor for PathMind, a platform that helps users create personalized learning roadmaps. You are an expert career counselor and technical mentor.
 
