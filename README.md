@@ -1,36 +1,180 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">🚀 PathMind</h1>
 
-## Getting Started
+<p align="center">
+AI-Powered Personalized Learning Roadmap Generator
+</p>
 
-First, run the development server:
+<p align="center">
+Generate structured learning roadmaps, track your progress, and achieve your learning goals faster.
+</p>
+
+<p align="center">
+
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+
+</p>
+
+---
+
+# 📖 About PathMind
+
+PathMind is an AI-powered web application that creates personalized learning roadmaps based on a user's chosen skill and experience level.
+
+Instead of searching through countless websites and videos, users receive a structured roadmap with learning resources, progress tracking, and an intuitive dashboard—all in one place.
+
+---
+
+# ✨ Features
+
+-  AI-generated learning roadmaps
+-  Generate unlimited personalized roadmaps
+-  Interactive checklist with progress tracking
+-  Dashboard to manage all generated roadmaps
+-  Secure User Authentication
+-  Clickable learning resources
+-  Progress Monitoring
+-  Clean & Responsive UI
+- AI Chatbot Assistance
+
+---
+
+# 🛠 Tech Stack
+
+## Frontend
+
+- Next.js
+- React.js
+- Tailwind CSS
+- Axios
+
+## Backend
+
+- Node.js
+- Express.js
+
+## Database
+
+- MongoDB
+
+## AI
+
+- Gemini API
+
+---
+
+# 📂 Project Structure
+
+
+```text
+PathMind
+│
+├── app/
+│   ├── ai-mentor/             
+│   ├── dashboard/             
+│   ├── generated-roadmap/     
+│   ├── login/                 
+│   ├── profile/             
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.js
+│   └── page.js                
+│
+├── components/
+│   ├── Authform.js
+│   ├── AuthImage.js
+│   ├── DashboardAnalytics.js
+│   ├── DashboardBanner.js
+│   ├── FeaturedRoadmaps.js
+│   ├── FloatingChatbotButton.js
+│   ├── Footer.js
+│   ├── Header.js
+│   ├── LayoutWrapper.js
+│   └── RoadmapGenerator.js
+│
+├── public/
+│
+├── server/
+│   ├── models/
+│   ├── routes/
+│   ├── server.js
+│   └── package.json
+│
+├── package.json
+└── README.md
+```
+---
+
+# ⚡ Installation
+
+
+
+## 1. Clone the repository
+
+
+## 2. Navigate to the project
+
+```bash
+cd PathMind
+```
+
+## 3. Install frontend dependencies
+
+```bash
+npm install
+```
+
+## 4. Install backend dependencies
+
+```bash
+cd server
+npm install
+```
+
+# ▶️ Running the Project
+
+## Start the backend
+
+```bash
+cd server
+node server
+```
+
+## Start the frontend
+
+Open another terminal:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# 🎯 Core Modules
 
-## Learn More
+✅ User Authentication
 
-To learn more about Next.js, take a look at the following resources:
+✅ Dashboard
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+✅ AI Roadmap Generator
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+✅ Progress Tracking
 
-## Deploy on Vercel
+✅ User Profile
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+✅ AI Chatbot
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+
+
+
